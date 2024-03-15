@@ -27,6 +27,9 @@ module.exports = {
 		library: 'Router',
 		libraryTarget: 'umd',
 	},
+	externals: {
+		'@tencent/t-comm/lib/router/path-to-regexp': 'commonjs @tencent/t-comm/lib/router/path-to-regexp'
+	},
 	resolve: {
 		extensions: ['.tsx', '.ts', 'd.ts', '.js', '.json'],
 	},

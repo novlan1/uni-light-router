@@ -4,7 +4,10 @@ import {baseConfig} from '../helpers/config';
 import {ERRORHOOK} from '../public/hooks'
 import {warnLock} from '../helpers/warn'
 import { createRoute, navjump } from '../public/methods';
-const Regexp = require('path-to-regexp');
+
+import pathToRegexp from '@tencent/t-comm/lib/router/path-to-regexp'
+
+// const Regexp = require('path-to-regexp');
 
 export function voidFun(...args:any):void{}
 
@@ -170,7 +173,7 @@ export function routesForMapRoute(
             if (getDataType<Array<string>|objectAny>(mapList) === '[object Array]') {
                 rule = (route as string);
             }
-            const pathRule:RegExp = Regexp(rule);
+            const pathRule:RegExp = pathToRegexp(rule);
             const result = pathRule.exec(startPath);
             if (result != null) {
                 if (getDataType<string|RoutesRule>(route) === '[object String]') {

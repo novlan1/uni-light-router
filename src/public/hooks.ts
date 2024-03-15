@@ -19,7 +19,9 @@ import {
 import { navjump } from './methods';
 import { proxyH5Mount } from '../H5/proxyHook';
 import { addKeepAliveInclude } from '../H5/patch';
+// #ifdef APP-PLUS
 import { tabIndexSelect } from '../app/appPatch';
+// #endif
 
 export const ERRORHOOK:Array<(error:navErrorRule, router:Router)=>void> = [
     (error, router) => router.lifeCycle.routerErrorHooks[0](error, router)
@@ -152,11 +154,14 @@ export function loopCallHook(
     const hook = hooks[index];
     const errHook = ERRORHOOK[0];
     hook(router, matTo, matFrom, toRoute, (nextTo:reloadNavRule) => {
+        // #ifdef APP-PLUS
         if (router.options.platform === 'app-plus') {
             if (nextTo === false || (typeof nextTo === 'string' || typeof nextTo === 'object')) {
                 tabIndexSelect(matTo, matFrom);
             }
         }
+        // #endif
+
         if (nextTo === false) {
             if (router.options.platform === 'h5') {
                 next(false);

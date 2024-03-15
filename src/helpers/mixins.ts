@@ -103,7 +103,7 @@ export function getMixins(Vue:any, router: Router):{
             }
         }
     };
-    return toggleHooks[(platform as 'h5'|'app-plus')];
+    return toggleHooks[(platform as 'h5'|'app-plus'|'app-lets')];
 }
 // #endif
 

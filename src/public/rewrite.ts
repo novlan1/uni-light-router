@@ -64,9 +64,12 @@ export function rewriteMethod(
                 forceNav?:boolean
             ):Promise<void> {
                 if (originCall) {
+                    // #ifdef APP-PLUS
                     if (router.options.platform === 'app-plus') {
                         await HomeNvueSwitchTab(router, (params as navtoRule), cacheOldMethod['reLaunch']);
                     }
+                    // #endif
+
                     uniOriginJump(router, oldMethod, name, params as originMixins, callOkCb, forceNav)
                 } else {
                     if (router.options.platform === 'app-plus') {
