@@ -261,6 +261,7 @@ export function forMatNextToFrom<T extends totalNextRoute>(
     matFrom: T;
 } {
     let [matTo, matFrom] = [to, from];
+    // #ifdef H5
     if (router.options.platform === 'h5') {
         const {vueNext, vueRouterDev} = (router.options.h5 as H5Config);
         if (!vueNext && !vueRouterDev) {
@@ -268,9 +269,12 @@ export function forMatNextToFrom<T extends totalNextRoute>(
             matFrom = createRoute(router, undefined, matFrom) as T;
         }
     } else {
+    // #endif
         matTo = createRoute(router, undefined, deepClone<T>(matTo)) as T;
         matFrom = createRoute(router, undefined, deepClone<T>(matFrom)) as T;
+    // #ifdef H5
     }
+    // #endif
     return {
         matTo: matTo,
         matFrom: matFrom

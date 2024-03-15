@@ -21,6 +21,7 @@ const appletProxy:{
     page: ''
 }
 
+// #ifndef MP
 export function getMixins(Vue:any, router: Router):{
     beforeCreate(this: any): void;
 } | {
@@ -102,13 +103,18 @@ export function getMixins(Vue:any, router: Router):{
             }
         }
     };
-    return toggleHooks[(platform as 'h5'|'app-plus'|'app-lets')];
+    return toggleHooks[(platform as 'h5'|'app-plus')];
 }
+// #endif
+
 export function initMixins(Vue: any, router: Router) {
     const routesMap = createRouteMap(router, router.options.routes);
     router.routesMap = routesMap; // 挂载自身路由表到路由对象下
     // Vue.util.defineReactive(router, '_Route', createRoute(router, 19970806))
+
+    // #ifndef MP
     Vue.mixin({
         ...getMixins(Vue, router)
     });
+    // #endif
 }

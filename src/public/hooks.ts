@@ -32,11 +32,13 @@ export const HOOKLIST: hookListRule = [
     (router, to, from, toRoute, next) => callHook(router.lifeCycle.afterHooks[0], to, from, router, next, false),
     (router, to, from, toRoute, next) => {
         router.$lockStatus = false;
+        // #ifndef MP
         if (router.options.platform === 'h5') {
             proxyH5Mount(router);
             // 【Fixe】 https://github.com/SilurianYang/uni-simple-router/issues/316  2021年12月10日14:30:13
             addKeepAliveInclude(router);
         }
+        // #endif
         router.runId++;
         return callHook(router.lifeCycle.routerAfterHooks[0], to, from, router, next, false)
     }

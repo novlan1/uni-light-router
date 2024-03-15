@@ -63,13 +63,11 @@ export function rewriteMethod(
                 callOkCb?:Function,
                 forceNav?:boolean
             ):Promise<void> {
-
                 if (originCall) {
                     if (router.options.platform === 'app-plus') {
                         await HomeNvueSwitchTab(router, (params as navtoRule), cacheOldMethod['reLaunch']);
                     }
                     uniOriginJump(router, oldMethod, name, params as originMixins, callOkCb, forceNav)
-
                 } else {
                     if (router.options.platform === 'app-plus') {
                         if (Object.keys(router.appMain).length === 0) {
@@ -81,8 +79,6 @@ export function rewriteMethod(
                     }
                     callRouterMethod(params as uniNavApiRule, name, router);
                 }
-
-
             };
         })
     }

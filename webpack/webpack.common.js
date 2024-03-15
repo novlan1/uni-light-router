@@ -2,7 +2,8 @@ const {resolve} = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack =require('webpack');
 const cmd = require('node-cmd');
-
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { LOADER_MAP } = require('@tencent/plugin-light/lib/loader');
 
 const {data:versions,err} = cmd.runSync('npm v uni-simple-router versions');
 
@@ -37,12 +38,25 @@ module.exports = {
 					{
 						loader: 'ts-loader',
 					},
+					{
+						loader: LOADER_MAP.ifdef,
+						options: {
+							context: { 
+								'MP-WEIXIN': true,
+								MP: true,
+							 },
+							type: ['css', 'js', 'html'],
+						}
+					}
 				],
 				exclude: /node_modules/,
 			},
 		],
 	},
 	plugins: [
+		// 	new BundleAnalyzerPlugin({
+    //   port: 8000,
+    // }),
 		new CopyPlugin([
 			{
 				force: true,
