@@ -14,6 +14,6 @@ module.exports = merge(common, {
     mode: "production",
     output: {
 		path: resolvePath('dist'),
-		filename: 'uni-simple-router.js',
+		filename: 'uni-simple-router-mp.js',
 	},
 })

@@ -6,3 +6,5 @@
 /dist/src
 package-lock.json
 .DS_Store
+examples/uni-simple-router2.0/src/dist/dev/
+examples/uni-simple-router2.0/src/dist/build/
