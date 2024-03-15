@@ -10,7 +10,7 @@ import {rewriteMethod} from '../public/rewrite'
 let AppReadyResolve:PromiseResolve = () => {};
 const AppReady:Promise<void> = new Promise(resolve => (AppReadyResolve = resolve));
 
-function createRouter(
+export function createRouter(
     params: InstantiateConfig
 ):Router {
     const options = assertNewOptions<InstantiateConfig>(params);
@@ -109,7 +109,8 @@ function createRouter(
     return router;
 }
 
-function RouterMount(
+// #ifdef H5
+export function RouterMount(
     Vim:any,
     router:Router,
     el:string | undefined = '#app'
@@ -129,8 +130,4 @@ function RouterMount(
         });
     } // 其他端目前不需要做啥
 }
-
-export {
-    RouterMount,
-    createRouter
-}
+// #endif
